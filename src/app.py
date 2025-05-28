@@ -93,7 +93,11 @@ def get_activities():
 
 @app.post("/activities/{activity_name}/signup")
 def signup_for_activity(activity_name: str, email: str):
-    """Sign up a student for an activity"""
+    """
+    Registers a student for a specified extracurricular activity.
+    
+    Raises an HTTP 404 error if the activity does not exist, or a 400 error if the student is already signed up. Returns a confirmation message upon successful registration.
+    """
     # Validate activity exists
     if activity_name not in activities:
         raise HTTPException(status_code=404, detail="Activity not found")
@@ -112,7 +116,18 @@ def signup_for_activity(activity_name: str, email: str):
 
 @app.delete("/activities/{activity_name}/remove")
 def remove_participant(activity_name: str, email: str):
-    """Remove a student from an activity"""
+    """
+    Removes a participant from a specified extracurricular activity.
+    
+    Raises an HTTP 404 error if the activity or participant is not found.
+    
+    Args:
+        activity_name: The name of the activity.
+        email: The email address of the participant to remove.
+    
+    Returns:
+        A confirmation message indicating successful removal.
+    """
     if activity_name not in activities:
         raise HTTPException(status_code=404, detail="Activity not found")
     activity = activities[activity_name]
