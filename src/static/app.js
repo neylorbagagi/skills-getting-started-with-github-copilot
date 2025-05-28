@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
-  // Function to fetch activities from API
+  /**
+   * Fetches activity data from the server and updates the UI with activity cards and participant lists.
+   *
+   * Retrieves activities from the `/activities` API endpoint, clears any loading messages, and dynamically generates activity cards displaying details and participants. Populates the activity selection dropdown with available activities. On failure, displays an error message in the activities list.
+   */
   async function fetchActivities() {
     try {
       const response = await fetch("/activities");
